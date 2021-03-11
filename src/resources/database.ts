@@ -1,8 +1,9 @@
 import {Pool} from 'pg';
 import * as debug from 'debug';
 import config from '../config';
+import * as models from '../models';
 
-const log = debug('unload-server:database');
+const log = debug('unload-server:resources:database');
 const pool = new Pool(config.database);
 
 const createTable = async (name, data) => {
@@ -21,13 +22,12 @@ export const init = async () => {
         const client = await connect()
         log('connected to PostgreSQL at %s:%s', config.database.host, config.database.port);
         client.release();
-
-        await createTable('users', [
-            'id integer PRIMARY KEY NOT NULL',
-            'firstname TEXT',
-            'lastname TEXT',
-            'age INT NOT NULL'
-        ]);
+        for (const modelKey of Object.keys(models)) {
+            await createTable(
+                models[modelKey].schema.name,
+                models[modelKey].schema.data
+            );
+        }
     } catch (e) {
         switch (e.code) {
             case '3D000':

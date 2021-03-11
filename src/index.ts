@@ -5,6 +5,11 @@ import * as routes from './routes';
 
 import {database as db} from './resources';
 import config from './config';
+import {user} from './models';
+
+/*
+Make a journal,
+ */
 
 const log = debug('unload-server');
 
@@ -17,6 +22,9 @@ for (const routeKey of Object.keys(routes)) {
 
 const init = async () => {
     await db.init();
+
+    const newUser = new user('painis');
+
     app.listen(config.server.port, () => {
         log('server started on port: %s', config.server.port);
     })
