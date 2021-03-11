@@ -18,7 +18,30 @@ for (const routeKey of Object.keys(routes)) {
 }
 
 const init = async () => {
-    await db.init();
+    await db.sequelize.sync()
+
+    let emily = await db.User.findOne({
+        where: db.Sequelize.or(
+            {username: 'emdog'},
+            {email: 'emily@gmail.com'}
+        )
+    });
+
+    if (!emily) {
+        emily = await db.User.create({
+            username: 'emdog',
+            email: 'emily@gmail.com',
+            password: 'Denver*123',
+            key: '1234'
+        })
+    }
+
+    emily.firstname = "emily";
+    emily.lastname = "bitch-tits";
+
+    emily.save();
+
+    log(emily.toJSON());
 
     app.listen(config.server.port, () => {
         log('server started on port: %s', config.server.port);

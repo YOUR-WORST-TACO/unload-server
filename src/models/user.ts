@@ -14,49 +14,46 @@ verified BOOL
 eula BOOL
  */
 
-const UserSchema = [
-    'id INT PRIMARY KEY NOT NULL',
-    'username varchar(32) NOT NULL',
-    'firstname varchar(64)',
-    'lastname varchar(64)',
-    'password varchar(128) NOT NULL',
-    'key varchar(256)',
-    'verified BOOL',
-    'eula BOOL'
-];
-
-export default class User {
-    static readonly schema = {
-        name: 'users',
-        data: UserSchema
-    };
-    readonly id: number; // shall not change
-    readonly key: string // shall not change
-    readonly username: string // shall not change
-
-    password: string;
-    firstname: string;
-    lastname: string;
-    eula: boolean;
-    verified: boolean;
-
-    constructor(
-        key: string,
-        username: string,
-        password: string,
-        id?: number,
-        firstname?: string,
-        lastname?: string,
-        eula?: boolean,
-        verified?: boolean
-    ) {
-        this.key = key;
-        this.username = username;
-        this.password = password;
-        this.id = id || NaN;
-        this.firstname = firstname || '';
-        this.lastname = lastname || '';
-        this.eula = eula || false;
-        this.verified = verified || false;
-    }
+export default (sequelize, Sequelize) => {
+    return sequelize.define('user', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        username: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            len: [2, 32]
+        },
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            len: [0, 64]
+        },
+        firstname: {
+            type: Sequelize.STRING,
+        },
+        lastname: {
+            type: Sequelize.STRING,
+        },
+        password: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            len: [0, 128]
+        },
+        key: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            len: [64, 256]
+        },
+        verified: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
+        eula: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        }
+    });
 }

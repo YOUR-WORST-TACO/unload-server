@@ -2,9 +2,9 @@ import {Middleware} from "koa";
 import {database as db} from "../resources";
 
 export const greet: Middleware = async (ctx, next) => {
-    let query = await db.query('select now()', []);
+    //let query = await db.query('select now()', []);
     ctx.body = {
-        message: query
+        message: "painis"
     };
     await next();
 };

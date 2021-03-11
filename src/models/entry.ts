@@ -1,4 +1,6 @@
 import * as debug from 'debug';
+import * as util from 'util';
+import * as dayjs from 'dayjs';
 
 const log = debug('unload-server:models:entry');
 
@@ -10,19 +12,23 @@ post_date DATE? is there a date type
 locked BOOL
  */
 
-const EntrySchema = [
-    'id INT PRIMARY KEY NOT NULL',
-    'CONSTRAINT fk_user FOREIGN KEY(id) REFERENCES users(id)',
-    'content varchar(5120)',
-    'post_date date',
-    'locked BOOL'
-];
-
-export default class Entry {
-    static readonly schema = {
-        name: 'entries',
-        data: EntrySchema
-    };
-    constructor() {
-    }
-}
+export default (sequelize, Sequelize) => {
+    return sequelize.define('entry', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        content: {
+            type: Sequelize.STRING
+        },
+        date: {
+            type: Sequelize.DATE,
+            defaultValue: Date.now()
+        },
+        locked: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        }
+    })
+};

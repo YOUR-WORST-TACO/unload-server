@@ -1,4 +1,4 @@
-import * as database from './database';
+import database from './database';
 
 export {
     database

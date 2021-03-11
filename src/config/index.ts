@@ -7,12 +7,16 @@ export default {
         port: +process.env.PORT || 8080,
     },
     database: {
+        database: process.env.DATABASE || 'unload',
         host: process.env.DATABASE_HOST || 'localhost',
         user: process.env.DATABASE_USER || 'taco',
-        max: +process.env.DATABASE_MAX || 20,
-        port: +process.env.DATABASE_PORT || 5432,
-        idleTimeoutMillis: +process.env.DATABASE_IDLE_TIMEOUT || 30000,
-        connectionTimeoutMillis: +process.env.DATABASE_CONNECTION_TIMEOUT || 2000,
-        database: process.env.DATABASE || 'unload'
+        password: process.env.DATABASE_PASSWORD || '',
+        dialect: process.env.DATABASE_TYPE || 'postgres',
+        pool: {
+            max: +process.env.POOL_MAX || 5,
+            min: +process.env.POOL_MIN || 0,
+            acquire: +process.env.POOL_ACQUIRE || 30000,
+            idle: +process.env.POOL_IDLE || 10000
+        }
     }
 };

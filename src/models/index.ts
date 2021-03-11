@@ -1,2 +1,2 @@
-export { default as user } from './user';
-export { default as entry } from './entry';
+export { default as userSchema } from './user';
+export { default as entrySchema } from './entry';
