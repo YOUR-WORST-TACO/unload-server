@@ -5,16 +5,13 @@ import * as routes from './routes';
 
 import {database as db} from './resources';
 import config from './config';
-import {user} from './models';
-
-/*
-Make a journal,
- */
+import * as koaBody from 'koa-body';
 
 const log = debug('unload-server');
 
 const app = new Koa();
 app.use(json());
+app.use(koaBody());
 
 for (const routeKey of Object.keys(routes)) {
     app.use(routes[routeKey].routes());
@@ -22,8 +19,6 @@ for (const routeKey of Object.keys(routes)) {
 
 const init = async () => {
     await db.init();
-
-    const newUser = new user('painis');
 
     app.listen(config.server.port, () => {
         log('server started on port: %s', config.server.port);

@@ -30,9 +30,33 @@ export default class User {
         name: 'users',
         data: UserSchema
     };
-    readonly name: string;
-    constructor(_name?: string) {
-        this.name = _name;
-        log('test user %s', this.name);
+    readonly id: number; // shall not change
+    readonly key: string // shall not change
+    readonly username: string // shall not change
+
+    password: string;
+    firstname: string;
+    lastname: string;
+    eula: boolean;
+    verified: boolean;
+
+    constructor(
+        key: string,
+        username: string,
+        password: string,
+        id?: number,
+        firstname?: string,
+        lastname?: string,
+        eula?: boolean,
+        verified?: boolean
+    ) {
+        this.key = key;
+        this.username = username;
+        this.password = password;
+        this.id = id || NaN;
+        this.firstname = firstname || '';
+        this.lastname = lastname || '';
+        this.eula = eula || false;
+        this.verified = verified || false;
     }
 }

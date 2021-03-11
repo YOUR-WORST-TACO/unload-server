@@ -1,5 +1,7 @@
 import * as helloController from './hello';
+import * as userController from './user';
 
 export {
-    helloController
+    helloController,
+    userController
 };
