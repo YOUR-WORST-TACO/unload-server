@@ -45,7 +45,9 @@ const init = async () => {
 
     app.listen(config.server.port, () => {
         log('server started on port: %s', config.server.port);
-    })
-}
+    });
+};
 
-init();
+init().catch((err) => {
+    log('server errored catastrophically %s', err);
+});

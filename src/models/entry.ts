@@ -20,7 +20,7 @@ export default (sequelize, Sequelize) => {
             primaryKey: true
         },
         content: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         },
         date: {
             type: Sequelize.DATE,

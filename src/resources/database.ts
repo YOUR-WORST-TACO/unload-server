@@ -23,6 +23,7 @@ const User = userSchema(sequelize, Sequelize);
 const Entry = entrySchema(sequelize, Sequelize);
 
 User.hasMany(Entry, {as: 'entries'});
+Entry.belongsTo(User, {as: 'user'});
 
 export default {
     Sequelize: Sequelize,

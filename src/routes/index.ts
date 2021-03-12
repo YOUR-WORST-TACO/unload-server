@@ -1,7 +1,7 @@
-import hello from './hello';
 import user from './user';
+import entry from './entry';
 
 export {
-    hello,
-    user
+    user,
+    entry
 }
