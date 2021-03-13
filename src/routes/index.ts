@@ -1,7 +1,7 @@
 import user from './user';
-import entry from './entry';
+import journal from './journal';
 
 export {
     user,
-    entry
+    journal
 }

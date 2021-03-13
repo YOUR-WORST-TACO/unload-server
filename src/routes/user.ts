@@ -3,8 +3,8 @@ import {userController} from '../controllers';
 
 const router = new Router();
 
-router.post('/user/add', userController.add);
-router.post('/user/update', userController.update);
-router.post('/user/remove', userController.remove);
+router.post('/api/add-user', userController.add);
+router.post('/api/update-user', userController.update);
+router.post('/api/remove-user', userController.remove);
 
 export default router;

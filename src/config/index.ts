@@ -10,7 +10,7 @@ export default {
         database: process.env.DATABASE || 'unload',
         host: process.env.DATABASE_HOST || 'localhost',
         user: process.env.DATABASE_USER || 'taco',
-        password: process.env.DATABASE_PASSWORD || '',
+        password: process.env.DATABASE_PASSWORD || 'password',
         dialect: process.env.DATABASE_TYPE || 'postgres',
         pool: {
             max: +process.env.POOL_MAX || 5,
